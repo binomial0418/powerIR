@@ -186,18 +186,7 @@ void setup()
   }
 }
 
-void loop()
-{  
-  if (WiFi.status() == WL_CONNECTED && goAPMode == false){
-    GetCmd(mv_Machine_nam);    
-    delay(500);
-    resetCount--;
-  }
-  if (resetCount == 0){
-    Serial.println("Reset..");
-    ESP.restart();
-    }
-}
+
 void onPressed() {
     Serial.println("Button has been pressed!");
 }
@@ -270,6 +259,19 @@ String getSsidPwdFromJson(String val,String field){
     
     return s;
   }
+}
+
+void loop()
+{  
+  if (WiFi.status() == WL_CONNECTED && goAPMode == false){
+    GetCmd(mv_Machine_nam);    
+    delay(500);
+    resetCount--;
+  }
+  if (resetCount == 0){
+    Serial.println("Reset..");
+    ESP.restart();
+    }
 }
 void GetCmd(String dev){
   String req;
