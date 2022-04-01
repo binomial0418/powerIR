@@ -299,126 +299,104 @@ void GetCmd(String dev){
   // 讀取連線情況
   while (client.connected()) {
     line = client.readStringUntil('\n');
-//    Serial.println("*"+line+"*");
-    //學習指令
-    if (line.indexOf("LeanStandBy") > 0){
-      req = "LeanStandBy";
-      break;
-    }
-    if (line.indexOf("LeanAirH") > 0){
-      req = "LeanAirH";
-      break;
-    }
-    if (line.indexOf("LeanDryHot") > 0){
-      req = "LeanDryHot";
-      break;
-    }
-    if (line.indexOf("LeanDryCold") > 0){
-      req = "LeanDryCold";
-      break;
-    }
-    if (line.indexOf("LeanAirCdrPower") > 0){
-      req = "LeanAirCdrPower";
-      break;
-    }
-    if (line.indexOf("LeanAirCdrSendCold") > 0){
-      req = "LeanAirCdrSendCold";
-      break;
-    }
-    if (line.indexOf("LeanAirCdrSendCold") > 0){
-      req = "LeanAirCdrSendCold";
-      break;
-    }
-    if (line.indexOf("LeanAirCdrSendAir") > 0){
-      req = "LeanAirCdrSendAir";
-      break;
-    }
-    if (line.indexOf("LeanAirCdrUP") > 0){
-      req = "LeanAirCdrUP";
-      break;
-    }
-    if (line.indexOf("LeanAirCdrDOWN") > 0){
-      req = "LeanAirCdrDOWN";
-      break;
-    }
-    if (line.indexOf("LeanAirCdrFlow") > 0){
-      req = "LeanAirCdrFlow";
-      break;
-    }
-    if (line.indexOf("LeanTvPower") > 0){
-      req = "LeanTvPower";
-      break;
-    }
-    if (line.indexOf("LeanTvMute") > 0){
-      req = "LeanTvMute";
-      break;
-    }
-    if (line.indexOf("StopLean") > 0){
-      req = "StopLean";
-      break;
-    }
-    //exec
-    if (line.indexOf("StandBy") > 0){
-      req = "StandBy";
-      break;
-    }
-    if (line.indexOf("AirH") > 0){
-      req = "AirH";
-      break;
-    }
-    if (line.indexOf("DryHot") > 0){
-      req = "DryHot";
-      break;
-    }
-    if (line.indexOf("DryCold") > 0){
-      req = "DryCold";
-      break;
-    }
-    if (line.indexOf("AirCdrPower") > 0){
-      req = "AirCdrPower";
-      break;
-    }
-    if (line.indexOf("AirCdrSendCold") > 0){
-      req = "AirCdrSendCold";
-      break;
-    }
-    if (line.indexOf("AirCdrSendCold") > 0){
-      req = "AirCdrSendCold";
-      break;
-    }
-    if (line.indexOf("AirCdrSendAir") > 0){
-      req = "AirCdrSendAir";
-      break;
-    }
-    if (line.indexOf("AirCdrUP") > 0){
-      req = "AirCdrUP";
-      break;
-    }
-    if (line.indexOf("AirCdrDOWN") > 0){
-      req = "AirCdrDOWN";
-      break;
-    }
-    if (line.indexOf("AirCdrFlow") > 0){
-      req = "AirCdrFlow";
-      break;
-    }
-    if (line.indexOf("TvPower") > 0){
-      req = "TvPower";
-      break;
-    }
-    if (line.indexOf("TvMute") > 0){
-      req = "TvMute";
-      break;
-    }
-    
-  }           
-  if (req.length() > 0){
+    req = DecodeCmdFromUrl(line);
+    if (req.length() > 0){
     //Serial.println(req);
-    ExecIrCmd(req);  
-  }
+      ExecIrCmd(req);  
+      break;
+    }
+  }           
   client.stop();
 }
 
+String DecodeCmdFromUrl(String line){
+  String req = "";
+  
+  //學習指令
+  if (line.indexOf("LeanStandBy") > 0){
+    req = "LeanStandBy";
+  }
+  if (line.indexOf("LeanAirH") > 0){
+    req = "LeanAirH";
+  }
+  if (line.indexOf("LeanDryHot") > 0){
+    req = "LeanDryHot";
+  }
+  if (line.indexOf("LeanDryCold") > 0){
+    req = "LeanDryCold";
+  }
+  if (line.indexOf("LeanAirCdrPower") > 0){
+    req = "LeanAirCdrPower";
+  }
+  if (line.indexOf("LeanAirCdrSendCold") > 0){
+    req = "LeanAirCdrSendCold";
+  }
+  if (line.indexOf("LeanAirCdrSendCold") > 0){
+    req = "LeanAirCdrSendCold";
+  }
+  if (line.indexOf("LeanAirCdrSendAir") > 0){
+    req = "LeanAirCdrSendAir";
+  }
+  if (line.indexOf("LeanAirCdrUP") > 0){
+    req = "LeanAirCdrUP";
+  }
+  if (line.indexOf("LeanAirCdrDOWN") > 0){
+    req = "LeanAirCdrDOWN";
+  }
+  if (line.indexOf("LeanAirCdrFlow") > 0){
+    req = "LeanAirCdrFlow";
+  }
+  if (line.indexOf("LeanTvPower") > 0){
+    req = "LeanTvPower";
+  }
+  if (line.indexOf("LeanTvMute") > 0){
+    req = "LeanTvMute";
+  }
+  if (line.indexOf("StopLean") > 0){
+    req = "StopLean";
+  }
+  //exec
+  if (line.indexOf("StandBy") > 0){
+    req = "StandBy";
+  }
+  if (line.indexOf("AirH") > 0){
+    req = "AirH";
+  }
+  if (line.indexOf("DryHot") > 0){
+    req = "DryHot";
+  }
+  if (line.indexOf("DryCold") > 0){
+    req = "DryCold";
+  }
+  if (line.indexOf("AirCdrPower") > 0){
+    req = "AirCdrPower";
+  }
+  if (line.indexOf("AirCdrSendCold") > 0){
+    req = "AirCdrSendCold";
+  }
+  if (line.indexOf("AirCdrSendCold") > 0){
+    req = "AirCdrSendCold";
+  }
+  if (line.indexOf("AirCdrSendAir") > 0){
+    req = "AirCdrSendAir";
+  }
+  if (line.indexOf("AirCdrUP") > 0){
+    req = "AirCdrUP";
+  }
+  if (line.indexOf("AirCdrDOWN") > 0){
+    req = "AirCdrDOWN";
+  }
+  if (line.indexOf("AirCdrFlow") > 0){
+    req = "AirCdrFlow";
+  }
+  if (line.indexOf("TvPower") > 0){
+    req = "TvPower";
+  }
+  if (line.indexOf("TvMute") > 0){
+    req = "TvMute";
+  }  
+  return req;
+}
 void ExecIrCmd(String cmd){
   //紅外線執行
   unsigned char code1[] = {0xe3,0x01};//抽風機待機 StandBy
